@@ -1,0 +1,108 @@
+.app {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.25rem;
+}
+
+header p {
+  color: #666;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.search-section label {
+  font-weight: 600;
+}
+
+.search-section textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.search-section button {
+  padding: 0.75rem 1.5rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.search-section button:hover {
+  background: #1d4ed8;
+}
+
+.search-section button:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc2626;
+  margin-top: 1rem;
+}
+
+.results-section {
+  margin-top: 2rem;
+}
+
+.results-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.result-card h3 {
+  margin: 0 0 0.25rem 0;
+}
+
+.result-card .coords {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.result-card .match-info {
+  font-weight: 600;
+  color: #059669;
+  margin: 0.25rem 0;
+}
+
+.result-card .matching-streets {
+  color: #4b5563;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.no-results {
+  color: #6b7280;
+  margin-top: 1rem;
+  text-align: center;
+}
