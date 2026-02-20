@@ -16,7 +16,7 @@ class StreetLocation(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     street_name = Column(String, nullable=False, index=True)
-    city = Column(String, nullable=False)
+    city = Column(String, nullable=True)
     state = Column(String, nullable=True)
     country = Column(String, nullable=False)
     latitude = Column(Float, nullable=False)

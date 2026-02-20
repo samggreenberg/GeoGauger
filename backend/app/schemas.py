@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class StreetLocationCreate(BaseModel):
     street_name: str
-    city: str
+    city: str | None = None
     state: str | None = None
     country: str
     latitude: float
@@ -13,7 +13,7 @@ class StreetLocationCreate(BaseModel):
 class StreetLocationResponse(BaseModel):
     id: int
     street_name: str
-    city: str
+    city: str | None
     state: str | None
     country: str
     latitude: float
@@ -27,7 +27,7 @@ class LocationQuery(BaseModel):
 
 
 class LocationMatch(BaseModel):
-    city: str
+    city: str | None
     state: str | None
     country: str
     latitude: float

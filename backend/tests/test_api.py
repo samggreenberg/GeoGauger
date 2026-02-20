@@ -1,3 +1,7 @@
+import os
+
+os.environ["GEOGAUGER_SKIP_BUILD"] = "1"
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -53,6 +57,21 @@ def test_add_street():
     assert "id" in data
 
 
+def test_add_street_without_city():
+    street = {
+        "street_name": "Highway 1",
+        "country": "US",
+        "state": "DE",
+        "latitude": 39.0,
+        "longitude": -75.5,
+    }
+    response = client.post("/api/streets", json=street)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["street_name"] == "Highway 1"
+    assert data["city"] is None
+
+
 def test_list_streets():
     street = {
         "street_name": "Oak Avenue",
@@ -102,4 +121,34 @@ def test_locate_with_matches():
     data = response.json()
     assert len(data) >= 1
     assert data[0]["city"] == "Austin"
+    assert data[0]["match_count"] == 2
+
+
+def test_locate_without_city():
+    streets = [
+        {
+            "street_name": "Market Street",
+            "state": "Delaware",
+            "country": "US",
+            "latitude": 39.74,
+            "longitude": -75.55,
+        },
+        {
+            "street_name": "King Street",
+            "state": "Delaware",
+            "country": "US",
+            "latitude": 39.75,
+            "longitude": -75.54,
+        },
+    ]
+    for s in streets:
+        client.post("/api/streets", json=s)
+
+    response = client.post(
+        "/api/locate", json={"street_names": ["Market Street", "King Street"]}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) >= 1
+    assert data[0]["state"] == "Delaware"
     assert data[0]["match_count"] == 2
